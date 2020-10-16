@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
 import DisplayBar from './DisplayBar';
 import Buttons from './Buttons';
 import History from './History'
-
-import * as Helper from '../Helper';
 import worker_script from "../worker";
+import * as Helper from '../Helper';
 import * as LocalStorage from '../localStorage'
-
+import './App.css';
 
 
 function App() {
@@ -20,8 +18,8 @@ function App() {
 	const [worker] = React.useState(new Worker(worker_script));
 	useEffect(() => {
 		worker.onmessage = (evt) => {
-			console.log(evt.data);
 			LocalStorage.setHistory(evt.data);
+			setHistory([].concat(history, evt.data));
 		};
 	}, []);
 
@@ -30,7 +28,7 @@ function App() {
 
 		if (afterCalculation) {
 			setInput(digit);
-			setAfterCalculation(false)
+			setAfterCalculation(false);
 			if (isOperatorClicked) {
 				setFormula(formula.concat(input));
 			}
@@ -46,7 +44,17 @@ function App() {
 	}
 
 	const onDecimal = ({ target }) => {
-		
+		const decimal = target.innerText;
+
+		if (afterCalculation) {
+			setInput(`0${decimal}`);
+			setAfterCalculation(false);
+		} else if (Helper.isNotNumber(input)) {
+			setInput(`0${decimal}`);
+			setFormula(formula.concat(input));
+		} else if (!input.includes(decimal)) {
+			setInput(input.concat(decimal));
+		}
 	}
 
 	const onOperator = ({ target }) => {
@@ -73,7 +81,7 @@ function App() {
 		const finalFormula = formula.concat(input);
 		const result = Helper.calculate(finalFormula);
 
-		const newHistoryItem = {
+		const newHistory = {
 			formula: finalFormula,
 			result: result
 		}
@@ -81,8 +89,8 @@ function App() {
 		setFormula([]);
 		setInput(result + '');
 		setAfterCalculation(true);
-		setHistory([].concat(history, newHistoryItem));
-		worker.postMessage(newHistoryItem); 
+		// setHistory([].concat(history, newHistory));
+		worker.postMessage(newHistory); 
 	}
 
 	return (

@@ -1,6 +1,5 @@
 const workercode = () => {
     this.onmessage = function(e) {
-        debugger
         this.postMessage(e.data);
     };
 };
