@@ -5,7 +5,7 @@ function Buttons(props) {
    return (
        <div className="buttons">
            <button className="operatorBtn" onClick={props.onClear}>C</button>
-           <button className="operatorBtn" onClick={props.onOperator}>-</button>
+           <button className="operatorBtn" onClick={props.onBackspace}>&#8592;</button>
            <button className="mathBtn" onClick={props.onOperator}>%</button>
            <button className="mathBtn" onClick={props.onOperator}>/</button>
 

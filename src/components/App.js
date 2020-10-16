@@ -92,6 +92,25 @@ function App() {
 		setHistory([].concat(history, newHistory));
 	}
 
+	const onBackspace = () => {
+		const inputLength = input.length;
+	
+		if (input === 'Infinity' || input === '-Infinity' || input === 'NaN') {
+			setInput('0');
+			setAfterCalculation(false);
+		} else if (inputLength > 1) {
+			setInput(input.slice(0, inputLength - 1));
+			setAfterCalculation(false);
+		} else if (input !== '0') {
+			setInput('0');
+			setAfterCalculation(false);
+		} else if (formula.length > 0) {
+			setInput(formula[formula.length - 1]);
+			setFormula(formula.slice(0, formula.length - 1));
+			setAfterCalculation(false);
+		}
+	}
+
 	const clearHistory = () => {
 		LocalStorage.clearHistory();
 		setHistory([]);
@@ -112,6 +131,7 @@ function App() {
 					onDecimal={onDecimal}
 					onDigit={onDigit}
 					onOperator={onOperator}
+					onBackspace={onBackspace}
 				/>
 			</div>
 			{
