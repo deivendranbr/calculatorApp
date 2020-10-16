@@ -1,11 +1,11 @@
 .buttons {
     display: flex;
     flex-wrap: wrap;
-}
-
-.buttons button {
+ }
+ 
+ .buttons button {
     width: 25%;
-    height: 40px;
+    height: 50px;
     text-align: center;
     padding: 8px 20px;
     box-sizing: border-box;
@@ -13,12 +13,24 @@
     border: 0;
     background-color: white;
     cursor: pointer;
-}
-
-.long-btn {
+    font-size: 1rem;
+ }
+ .long-btn {
     flex: 1;
-}
-
-.buttons button:hover {
-    background-color: #e91e63
-}
+ }
+ 
+ .operatorBtn {
+    color: #D40942;
+ }
+ 
+ .mathBtn {
+    color: #FF4006;
+ }
+ button.long-btn {
+    background-color: #D40640;
+    color: #fff;
+ }
+ .buttons button:hover {
+    background-color: #D40640;
+    color: #fff;
+ }

@@ -16,30 +16,28 @@ export function getPriority(input) {
     return 0;
 }
 
-export function calculate(arrFormula) {
-    const arrPostfix = infix2Postfix(arrFormula);
-    return evaluatePostfix(arrPostfix);
+export function calculate(calcInputArray) {
+    const arrangedInputArray = arrange(calcInputArray);
+    return calculateResult(arrangedInputArray);
 }
 
-export function infix2Postfix(arrFormula) {
+export function arrange(calcInputArray) {
     let result = [], stack = [];
   
-    arrFormula.forEach(item => {
+    calcInputArray.forEach(item => {
         if (isNumber(item)) {
             result.push(item);
-        } else if (isOperator(item)) {
+        } else {
             while (stack.length > 0) {
-            const peekedItem = stack[stack.length - 1];
+            const existingOperator = stack[stack.length - 1];
     
-            if (isOperator(peekedItem) && getPriority(peekedItem) >= getPriority(item)) {
-                result.push(peekedItem);
+            if (isOperator(existingOperator) && getPriority(existingOperator) >= getPriority(item)) {
+                result.push(existingOperator);
                 stack.pop();
             } else break;
             }
     
             stack.push(item);
-        } else {
-            console.log("Something else!!!");
         }
     });
   
@@ -50,13 +48,13 @@ export function infix2Postfix(arrFormula) {
     return result;
 }
 
-export function evaluatePostfix(arrPostfix) {
+export function calculateResult(arrangedInputArray) {
     let stack = [];
   
-    arrPostfix.forEach(item => {
+    arrangedInputArray.forEach(item => {
         if (isNumber(item)) {
             stack.push(item);
-        } else if (isOperator(item)) {
+        } else {
             const num1 = Number.parseFloat(stack.pop()), num2 = Number.parseFloat(stack.pop());
             let result = '';
     
@@ -77,12 +75,10 @@ export function evaluatePostfix(arrPostfix) {
                 result = num2 % num1;
                 break;
             default:
-                console.log('Something else!!!');
+                console.log('error..!');
             }
     
             stack.push(result + '');
-        } else {
-            console.log("Something else!!!");
         }
     });
   

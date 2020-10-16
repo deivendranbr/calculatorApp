@@ -1,15 +1,19 @@
-.App { 
-    width: 400px;
+.App {
+    width: 450px;
     margin: 50px auto;
 }
+
 .container {
     border: 2px solid red;
     color: white;
     text-align: end;
+    border: 10px solid;
+    border-image-source: linear-gradient(130deg, #A9235A, #6C2444);
+    border-image-slice: 1;
 }
 
 .clear-history {
-    background-color: #e91e63;
+    background-color:#D40640;
     border: none;
     color: white;
     padding: 15px 32px;

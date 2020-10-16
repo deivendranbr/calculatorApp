@@ -1,15 +1,15 @@
-
 .display-container {
     display: flex;
     flex-direction: column;
 }
-
+ 
 .display-container textarea {
-    background-color: #e91e63;
-    padding: 1em .5em;
+    background-color: #D40640;
+    padding: 10px 20px;
     outline: none;
     border: 0;
     resize: none;
     text-align: end;
     color: white;
+    font-size: 2rem;
 }

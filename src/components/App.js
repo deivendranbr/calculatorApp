@@ -14,8 +14,8 @@ function App() {
 	const [afterCalculation, setAfterCalculation] = useState(false);
 	const [isOperatorClicked, setIsOperatorClicked] = useState(false);
 	const [history, setHistory] = useState(LocalStorage.getHistory());
-
 	const [worker] = React.useState(new Worker(worker_script));
+
 	useEffect(() => {
 		worker.onmessage = (evt) => {
 			LocalStorage.setHistory(evt.data);
