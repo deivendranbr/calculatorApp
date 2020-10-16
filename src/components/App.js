@@ -19,7 +19,6 @@ function App() {
 	useEffect(() => {
 		worker.onmessage = (evt) => {
 			LocalStorage.setHistory(evt.data);
-			setHistory([].concat(history, evt.data));
 		};
 	}, []);
 
@@ -90,11 +89,14 @@ function App() {
 		setInput(result + '');
 		setAfterCalculation(true);
 		worker.postMessage(newHistory); 
+		setHistory([].concat(history, newHistory));
 	}
 
 	const clearHistory = () => {
 		LocalStorage.clearHistory();
 		setHistory([]);
+		setFormula([]);
+		setInput(0);
 	}
 
 	return (
