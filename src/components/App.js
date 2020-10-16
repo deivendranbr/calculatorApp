@@ -89,8 +89,12 @@ function App() {
 		setFormula([]);
 		setInput(result + '');
 		setAfterCalculation(true);
-		// setHistory([].concat(history, newHistory));
 		worker.postMessage(newHistory); 
+	}
+
+	const clearHistory = () => {
+		LocalStorage.clearHistory();
+		setHistory([]);
 	}
 
 	return (
@@ -108,7 +112,12 @@ function App() {
 					onOperator={onOperator}
 				/>
 			</div>
-			<History data={history} />
+			{
+				history.length > 0 && <button className="clear-history" onClick={clearHistory}>Clear History</button>
+			}
+			{
+				history.length > 0 && <History data={history} />
+			}
 		</div>
 	);
 }

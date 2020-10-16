@@ -7,3 +7,22 @@
     color: white;
     text-align: end;
 }
+
+.clear-history {
+    background-color: #e91e63;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    transform: scale(0.8);
+    position: relative;
+    right: -30%;
+}
+
+.clear-history:hover {
+    transform: scale(0.9);
+}

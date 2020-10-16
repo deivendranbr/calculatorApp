@@ -12,3 +12,7 @@ export const setHistory = (data) => {
         localStorage.setItem('calcHistory', JSON.stringify(history));
     }
 }
+
+export const clearHistory = () => {
+    localStorage.removeItem('calcHistory');
+}
