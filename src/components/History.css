@@ -1,0 +1,13 @@
+.history-container {
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    width: 330px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.history-item {
+    padding: 5px;
+    border-bottom: 1px solid #eeee;
+}

@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import DisplayBar from './DisplayBar';
 import Buttons from './Buttons';
+import History from './History'
 
 import * as Helper from '../Helper';
+import worker_script from "../worker";
+import * as LocalStorage from '../localStorage'
 
 
 
@@ -12,7 +15,15 @@ function App() {
 	const [input, setInput] = useState('0');
 	const [afterCalculation, setAfterCalculation] = useState(false);
 	const [isOperatorClicked, setIsOperatorClicked] = useState(false);
-	const [history, setHistory] = useState([]);
+	const [history, setHistory] = useState(LocalStorage.getHistory());
+
+	const [worker] = React.useState(new Worker(worker_script));
+	useEffect(() => {
+		worker.onmessage = (evt) => {
+			console.log(evt.data);
+			LocalStorage.setHistory(evt.data);
+		};
+	}, []);
 
 	const onDigit = ({ target }) => {
 		const digit = target.innerText;
@@ -70,8 +81,8 @@ function App() {
 		setFormula([]);
 		setInput(result + '');
 		setAfterCalculation(true);
-		setHistory([].concat(newHistoryItem, history));
-		console.log(history);
+		setHistory([].concat(history, newHistoryItem));
+		worker.postMessage(newHistoryItem); 
 	}
 
 	return (
@@ -89,6 +100,7 @@ function App() {
 					onOperator={onOperator}
 				/>
 			</div>
+			<History data={history} />
 		</div>
 	);
 }
