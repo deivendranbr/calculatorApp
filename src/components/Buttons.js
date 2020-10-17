@@ -26,7 +26,7 @@ function Buttons(props) {
 
            <button onClick={props.onDigit}>0</button>
            <button onClick={props.onDecimal}>.</button>
-           <button class="long-btn" onClick={props.onEqual}>=</button>
+           <button className="long-btn" onClick={props.onEqual}>=</button>
        </div>
    )
 }

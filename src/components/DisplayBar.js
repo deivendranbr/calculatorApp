@@ -3,9 +3,9 @@ import './DisplayBar.css';
 
 function DisplayBar(props) {
     return (
-        <div class="display-container">
-            <textarea className="display-formula" value={props.formula.join("")} ></textarea>
-            <textarea className="display-input" id="display" rows="1" value={props.input}></textarea>
+        <div className="display-container">
+            <textarea className="display-formula" value={props.formula.join("")} readOnly= {true}></textarea>
+            <textarea className="display-input" id="display" rows="1" value={props.input} readOnly= {true}></textarea>
         </div>
     )
 }

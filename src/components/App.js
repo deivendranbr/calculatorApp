@@ -20,7 +20,7 @@ function App() {
 		worker.onmessage = (evt) => {
 			LocalStorage.setHistory(evt.data);
 		};
-	}, []);
+	});
 
 	const onDigit = ({ target }) => {
 		const digit = target.innerText;
